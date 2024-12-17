@@ -1,0 +1,13 @@
+npm install sequelize sqlite3
+npm install express, graphql, graphql-http, jest
+TO BE CONTINUED
+
+npm install --save-dev sequelize-cli
+
+npx sequelize-cli init
+
+modificat config.json -> js, inlocuit cu cod de la boilerplate
+
+npx sequelize-cli model:generate --name User --attributes ID:string,Name:string,Password:string
+npx sequelize-cli model:generate --name Account --attributes IBAN:string,CardNo:string,Balance:number 
+npx sequelize-cli db:migrate
