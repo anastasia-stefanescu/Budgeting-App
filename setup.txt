@@ -1,13 +1,82 @@
+npm init
 npm install sequelize sqlite3
-npm install express, graphql, graphql-http, jest
-TO BE CONTINUED
+npm install express graphql graphql-http bcrypt jest jsonwebtoken
 
 npm install --save-dev sequelize-cli
 
 npx sequelize-cli init
 
 modificat config.json -> js, inlocuit cu cod de la boilerplate
+adaugat "type": "module" la package.json
 
-npx sequelize-cli model:generate --name User --attributes ID:string,Name:string,Password:string
-npx sequelize-cli model:generate --name Account --attributes IBAN:string,CardNo:string,Balance:number 
+Ia cod din models/index.js din boilerplate
+
+npx sequelize-cli model:generate --name User --attributes name:string,password:string
+npx sequelize-cli model:generate --name Account --attributes IBAN:string,cardNo:string,balance:number,userId:integer
+npx sequelize-cli model:generate --name Budget --attributes name:string,balance:number,accountId:integer
+npx sequelize-cli model:generate --name Transaction --attributes description:string,date:string,amount:number,recipient:string,accountId:integer,budgetId:integer
+
+In folderul models, dupa ce se genereaza modelele trebuie modificat:
+- 'require', 'import {Model} from 'sequelize'
+- 'models.exports', 'export default';
+
+Fisierele migratiilor trebuie redenumite de la .js to .cjs inainte de db:migrate !!
+
+In fisierele de migratii trebuie completate relatiile prin chei
+In fisierele modelelor trebuie definite asociatiile hasMany, belongsTo
+
+APOI DB:MIGRATE
+
+RUN THIS IF THE MIGRATIONS WERE CREATED ON ANOTHER DEVICE
+npm install 
 npx sequelize-cli db:migrate
+
+
+In altair send requests to http://localhost:{port}/graphql
+! port aici este 3005 
+
+
+EXEMPLE DE MUTATII
+
+
+
+
+----- BOILERPLATE
+
+mutation CreateUser {
+  createUser(user: { 
+    name: "Maria", 
+    password: "mariapop123" 
+  }) {
+    id
+    name
+  }
+}
+
+mutation Login {
+  login( credentials: {
+    username: "Maria",
+    password: "mariapop123"
+  }){
+    token
+  }
+}
+
+After login, click on 'Set headers' and do
+ key: 'Authorization'
+ value: 'Bearer <token_value>'
+
+mutation CreatePost {
+  createPost( post: {
+    title: "Trei!",
+    body: "a treia postare"
+  }) {
+    id
+    title
+    body
+    author {
+      id
+      name
+    }
+  }
+}

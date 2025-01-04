@@ -1,8 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
+import { Model } from "sequelize";
+export default (sequelize, DataTypes) => {
   class Account extends Model {
     /**
      * Helper method for defining associations.
@@ -10,13 +8,22 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Account.belongsTo(models.User, {
+        foreignKey: 'userId',
+      });
+      Account.hasMany(models.Budget, {
+        foreignKey: "accountId",
+      });
+      Account.hasMany(models.Transaction, {
+        foreignKey: "accountId",
+      });
     }
   }
   Account.init({
     IBAN: DataTypes.STRING,
-    CardNo: DataTypes.STRING,
-    Balance: DataTypes.NUMBER
+    cardNo: DataTypes.STRING,
+    balance: DataTypes.NUMBER,
+    userId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Account',
