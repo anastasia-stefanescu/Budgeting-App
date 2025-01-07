@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import db from '../../models/index.js';
 
 
 function generateRandomNumberString(length) {
@@ -19,9 +20,9 @@ export const createAccount = async (account, context) => {
     
     const createdAccount = await db.Account.create({
         IBAN: iban,
-        CardNo: cardno,
-        Balance: account.Balance,
-        user_id: context.user_id,
+        cardNo: cardno,
+        balance: account.balance,
+        userId: context.user_id,
     });
 
     return createdAccount;

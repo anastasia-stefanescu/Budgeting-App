@@ -2,7 +2,7 @@ import {GraphQLBoolean, GraphQLInt} from 'graphql';
 import db from '../../../models/index.js';
 
 const deleteAccountResolver = async (_, args, context) => {
-    const isAuthorized = !!context.user_id && context.user_id === account.user_id
+    const isAuthorized = !!context.user_id;
    
     if(!isAuthorized) {
         return false;
@@ -15,6 +15,11 @@ const deleteAccountResolver = async (_, args, context) => {
     })
 
     if (!account) {
+        return false;
+    }
+    if (account.userId !== context.user_id)
+    {
+        console.log ("Users can only delete their own accounts");
         return false;
     }
 

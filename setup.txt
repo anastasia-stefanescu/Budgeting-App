@@ -76,6 +76,37 @@ mutation DeleteUser {
   deleteUser(id: 1) 
 }
 
+mutation CreateAccount {
+  createAccount(account: {balance: 19000}) {
+    id 
+    IBAN
+    cardNo
+    balance
+    author {
+      id
+      name
+    }
+  }
+}
+
+mutation UpdateAccount {
+  updateAccount(id:5, account: {balance: 5000}) {
+    id 
+    IBAN
+    cardNo
+    balance
+    author {
+      id
+      name
+    }
+  }
+}
+
+mutation DeleteAccount {
+  deleteAccount(id: 6)
+}
+
+
 
 -----PENTRU BOILERPLATE
 

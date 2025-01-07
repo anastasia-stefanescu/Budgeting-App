@@ -1,30 +1,23 @@
 
 import budgetType from '../../types/budgetType.js';
 import budgetInputType from '../../types/budgetInputType.js';
+import { createBudget } from '../../../core/services/createBudgetService.js';
 
 const createBudgetMutationResolver = async (_, { budget }, context) => {
-    const account = await db.Account.findOne({
-        where: {
-            id: budget.accountId
-        }
-    })
-    console.log(account);
-
-    const user = await db.User.findOne({ where: {
-        id: account.userId
-    }});
-
-    const isAuthorized = !!context.user_id && context.user_id === user.id
+    const isAuthorized = !!context.account_id
    
     if(!isAuthorized) {
         console.log("Not authorized");
         return false;
     }
+    const account = await db.Account.findOne({
+        where: {
+            id: context.accountId
+        }
+    })
+    //console.log(account);
 
-    const createdBudget = await db.Budget.create({
-        name: budget.name,
-        Balance: budget.Balance,
-    });
+    const createdBudget = await createBudget(budget, context);
 
     return createdBudget;   
 }

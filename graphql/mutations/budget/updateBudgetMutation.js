@@ -4,18 +4,7 @@ import budgetType from '../../types/budgetType.js';
 import db from '../../../models/index.js';
 
 const updateBudgetMutationResolver = async (_, args) => {
-    const account = await db.Account.findOne({
-        where: {
-            id: budget.accountId
-        }
-    })
-    console.log(account);
-
-    const user = await db.User.findOne({ where: {
-        id: account.userId
-    }});
-
-    const isAuthorized = !!context.user_id && context.user_id === user.id
+    const isAuthorized = !!context.account_id
    
     if(!isAuthorized) {
         return false;
@@ -32,6 +21,12 @@ const updateBudgetMutationResolver = async (_, args) => {
     if(!budget) {
         return false;
     }
+    if (budget.accountId !== context.account_id)
+        {
+            console.log ("Accounts can only update their own budgets");
+            return false;
+        }
+
 
     const updatedBudget = await budget.update({
         ...args.budget,

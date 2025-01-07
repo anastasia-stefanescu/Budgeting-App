@@ -4,7 +4,7 @@ import accountType from '../../types/accountType.js';
 import db from '../../../models/index.js';
 
 const updateAccountMutationResolver = async (_, args, context) => {
-    const isAuthorized = !!context.user_id && context.user_id === account.user_id
+    const isAuthorized = !!context.user_id;
    
     if(!isAuthorized) {
         console.log("Not authorized");
@@ -22,6 +22,11 @@ const updateAccountMutationResolver = async (_, args, context) => {
     if(!account) {
         return false;
     }
+    if (account.userId !== context.user_id)
+        {
+            console.log ("Users can only delete their own accounts");
+            return false;
+        }
 
     const updatedAccount = await account.update({
         ...args.account,

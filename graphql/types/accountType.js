@@ -4,9 +4,10 @@ import userType from './userType.js';
 const accountType = new GraphQLObjectType({
     name: 'Account',
     fields: {
+        id: {type: GraphQLInt },
         IBAN: { type: GraphQLString },
-        CardNo: { type: GraphQLString },
-        Balance: { type: GraphQLInt},
+        cardNo: { type: GraphQLString },
+        balance: { type: GraphQLInt},
         createdAt: { type: GraphQLString },
         updatedAt: { type: GraphQLString },
         author: { 

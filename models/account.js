@@ -10,12 +10,15 @@ export default (sequelize, DataTypes) => {
     static associate(models) {
       Account.belongsTo(models.User, {
         foreignKey: 'userId',
+        //as: "user",// the alias not necessary!
       });
       Account.hasMany(models.Budget, {
         foreignKey: "accountId",
+        as: "budgets",// the alias not necessary!
       });
       Account.hasMany(models.Transaction, {
         foreignKey: "accountId",
+        as: "transactions",// the alias not necessary!
       });
     }
   }

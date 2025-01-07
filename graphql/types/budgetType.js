@@ -5,7 +5,7 @@ const budgetType = new GraphQLObjectType({
     name: 'Budget',
     fields: {
         name: { type: GraphQLString },
-        Balance: { type: GraphQLInt},
+        balance: { type: GraphQLInt},
         createdAt: { type: GraphQLString },
         updatedAt: { type: GraphQLString },
         account: { 

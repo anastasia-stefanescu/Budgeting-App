@@ -4,7 +4,7 @@ const budgetInputType = new GraphQLInputObjectType({
     name: 'BudgetInput',
     fields: {
         name: { type: GraphQLString },
-        Balance: { type: GraphQLInt},
+        balance: { type: GraphQLInt},
     }
 });
 

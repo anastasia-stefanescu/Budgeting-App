@@ -15,19 +15,24 @@ const schema = new GraphQLSchema({
 
 
 const jwtMiddleware = (req, res, next) => {
-    console.log('Inside MIDDLEWARE!!');
     const token = req.headers.authorization?.replace("Bearer ", "");
 
-    console.log("Received token:", token);
+    const account_context = req.headers.accountContext;
+    const budget_context = req.headers.budgetContext;
 
     if(!token) {
         next();
         return;
     }
 
+    if(account_context) {
+        req.account_id = account_context;
+    }
+    if (budget_context) {req.budget_id = budget_context; }
+
+
     try {
         const decodedPayload = jwt.verify(token, JWT_SECRET);
-        console.log('decodedPayload', decodedPayload);
         req.user_id = decodedPayload.user_id;
         next();
     } catch(e) {
@@ -48,6 +53,8 @@ app.all(
         context: (req) => {
             return {
                 user_id: req.raw.user_id,
+                account_id: req.raw.account_id,
+                budget_id:req.raw.budget_id
             }
         }
     })

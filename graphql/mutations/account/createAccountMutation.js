@@ -7,7 +7,7 @@ import { createAccount } from '../../../core/services/createAccountService.js';
 
 
 const createAccountMutationResolver = async (_, { account }, context) => {
-    const isAuthorized = !!context.user_id && context.user_id === account.user_id
+    const isAuthorized = !!context.user_id 
    
     if(!isAuthorized) {
         console.log("Not authorized");
@@ -16,7 +16,6 @@ const createAccountMutationResolver = async (_, { account }, context) => {
 
     const createdAccount = await createAccount(account, context);
 
-    
     return createdAccount;   
 }
 
