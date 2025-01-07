@@ -39,9 +39,42 @@ ALTAIR
   ! port aici este 3005 
 
 
-EXEMPLE DE MUTATII
+EXEMPLE DE MUTATII - TOATE SE TRIMIT CU POST
+mutation CreateUser {
+  createUser(user: { 
+    name: "Maria", 
+    password: "mariapop123" 
+  }) {
+    id
+    name
+  }
+}
 
+mutation Login {
+  login( credentials: {
+    username: "Maria",
+    password: "mariapop123"
+  }){
+    token
+  }
+}
+!!! DUPA LOGIN, TREBUIE SETAT HEADER:
+ key: 'Authorization'
+ value: 'Bearer <token_value>'
+  !!!! ATENTIE: ATUNCI CAND SE DA PASTE LA TOKEN IN 'SET HEADERS',
+    EL ADAUGA UN 'BEARER' LA SFARSIT DE TOT, TREBUIE SCOS
 
+mutation UpdateUser {
+  updateUser(id: 1, user: {name: "MariaPop", password:  "mariapop123"})
+  {
+    id
+    name
+  }
+}
+
+mutation DeleteUser {
+  deleteUser(id: 1) 
+}
 
 
 -----PENTRU BOILERPLATE

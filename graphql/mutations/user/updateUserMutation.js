@@ -3,7 +3,13 @@ import userInputType from '../../types/userInputType.js';
 import userType from '../../types/userType.js';
 import db from '../../../models/index.js';
 
-const updateUserMutationResolver = async (_, args) => {
+const updateUserMutationResolver = async (_, args, context) => {
+    const isAuthorized = !!context.user_id
+   
+    if(!isAuthorized) {
+        return false;
+    }
+
     const id = args.id;
 
     const user = await db.User.findOne({

@@ -2,6 +2,10 @@
 import accountType from '../../types/accountType.js';
 import accountInputType from '../../types/accountInputType.js';
 
+import { createAccount } from '../../../core/services/createAccountService.js';
+
+
+
 const createAccountMutationResolver = async (_, { account }, context) => {
     const isAuthorized = !!context.user_id && context.user_id === account.user_id
    
@@ -9,11 +13,10 @@ const createAccountMutationResolver = async (_, { account }, context) => {
         console.log("Not authorized");
         return false;
     }
-    
-    const createdAccount = await db.Account.create({
-        Balance: account.Balance,
-    });
 
+    const createdAccount = await createAccount(account, context);
+
+    
     return createdAccount;   
 }
 

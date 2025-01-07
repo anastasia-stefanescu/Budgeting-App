@@ -4,6 +4,7 @@ import { GraphQLSchema } from 'graphql'
 import queryType from './graphql/rootTypes/queryType.js'
 import mutationType from './graphql/rootTypes/mutationType.js'
 import jwt from 'jsonwebtoken';
+import { JWT_SECRET } from "./constants.js";
 
 const app = express();
 
@@ -14,7 +15,10 @@ const schema = new GraphQLSchema({
 
 
 const jwtMiddleware = (req, res, next) => {
+    console.log('Inside MIDDLEWARE!!');
     const token = req.headers.authorization?.replace("Bearer ", "");
+
+    console.log("Received token:", token);
 
     if(!token) {
         next();

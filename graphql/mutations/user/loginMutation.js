@@ -21,8 +21,10 @@ const loginMutationResolver = async (_, args) => {
     const providedPassword = args.credentials.password;
     const userPassword = user.password;
 
-    const passwordIsValid = await bcrypt.compare(providedPassword, userPassword);
+    console.log('Parola de login:', providedPassword, 'parola din db:', userPassword);
 
+    const passwordIsValid = await bcrypt.compare(providedPassword, userPassword);
+    console.log
     if(!passwordIsValid) {
         console.log("Password is invalid");
 
@@ -32,6 +34,8 @@ const loginMutationResolver = async (_, args) => {
     }
     
     const token = jwt.sign({ user_id: user.id }, JWT_SECRET);
+    console.log("Inside login mutation, signed token:", token);
+    console.log("User JWT:", JWT_SECRET);
     
     return {
         token,
