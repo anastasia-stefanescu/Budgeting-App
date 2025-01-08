@@ -20,6 +20,9 @@ export default (sequelize, DataTypes) => {
         foreignKey: "accountId",
         as: "transactions",// the alias not necessary!
       });
+      Account.belongsToMany(models.Group, {
+        through: models.Member,
+      });
     }
   }
   Account.init({
