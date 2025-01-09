@@ -10,6 +10,9 @@ import updateAccountMutation from '../mutations/account/updateAccountMutation.js
 import createAccountMutation from '../mutations/account/createAccountMutation.js';
 import deleteAccountMutation from '../mutations/account/deleteAccountMutation.js';
 import createTransactionMutation from '../mutations/transaction/createTransactionMutation.js';
+import createGroupMutation from '../mutations/group/createGroupMutation.js';
+import updateGroupMutation from '../mutations/group/updateGroupMutation.js';
+import deleteGroupMutation from '../mutations/group/deleteGroupMutation.js';
 
 const queryType = new graphql.GraphQLObjectType({
     name: "Mutation",
@@ -24,7 +27,10 @@ const queryType = new graphql.GraphQLObjectType({
         createBudget: createBudgetMutation,
         updateBudget: updateBudgetMutation,
         deleteBudget: deleteBudgetMutation,
-        createTransaction: createTransactionMutation
+        createTransaction: createTransactionMutation,
+        createGroup: createGroupMutation,
+        updateGroup: updateGroupMutation,
+        deleteGroup: deleteGroupMutation,
     }
 });
 

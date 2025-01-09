@@ -1,17 +1,17 @@
 import { GraphQLInt, GraphQLList } from 'graphql';
 import db from '../../models/index.js';
-import accountType from '../types/accountType.js';
+import userType from '../types/userType.js';
 
-const memberQueryResolver = async (_, { accountId, groupId }) => {
+const memberQueryResolver = async (_, { userId, groupId }) => {
     const member = await db.Member.findOne({
-        where: { accountId, groupId },
+        where: { userId, groupId },
     });
 
     if(!member) 
         return null;
 
-    const account = await db.Account.findOne({
-        where: { id: accountId },
+    const account = await db.User.findOne({
+        where: { id: userId },
     });
 
     return account;
@@ -19,7 +19,7 @@ const memberQueryResolver = async (_, { accountId, groupId }) => {
 
 const membersQueryResolver = async (_, { groupId }) => {
     const members = await db.Member.findAll({
-        where: { group: groupId },
+        where: { groupId: groupId },
     });
 
     if(!members)
@@ -28,8 +28,8 @@ const membersQueryResolver = async (_, { groupId }) => {
     let accounts = [];
 
     for(let member of members) {
-        const account = await db.Account.findOne({
-            where: { id: member.accountId },
+        const account = await db.User.findOne({
+            where: { id: member.userId },
         });
 
         accounts.push(account);
@@ -39,7 +39,7 @@ const membersQueryResolver = async (_, { groupId }) => {
 };
 
 export const memberQuery = {
-    type: accountType,
+    type: userType,
     args: {
         accountId: { type: GraphQLInt },
         groupId: { type: GraphQLInt },
@@ -48,7 +48,7 @@ export const memberQuery = {
 };
 
 export const membersQuery = {
-    type: new GraphQLList(accountType),
+    type: new GraphQLList(userType),
     args: {
         groupId: { type: GraphQLInt },
     },

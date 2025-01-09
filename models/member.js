@@ -12,11 +12,12 @@ export default (sequelize, DataTypes) => {
     }
   }
   Member.init({
-    accountId: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER,
     groupId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Member',
+    timestamps: false
   });
   return Member;
 };

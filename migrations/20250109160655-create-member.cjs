@@ -3,26 +3,32 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Members', {
-      accountId: {
+      userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        primaryKey: true,
         references: {
           model: {
-            tableName: 'Accounts',
+            tableName: 'Users',
           },
-          key: 'id',
-        }
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
       groupId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        primaryKey: true,
         references: {
           model: {
             tableName: 'Groups',
           },
-          key: 'id',
-        }
-      },
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      }
     });
   },
   async down(queryInterface, Sequelize) {

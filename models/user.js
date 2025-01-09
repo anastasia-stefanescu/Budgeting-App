@@ -11,6 +11,9 @@ export default (sequelize, DataTypes) => {
       User.hasMany(models.Account, {
         foreignKey: "userId",
       });
+      User.belongsToMany(models.Group, {
+        through: models.Member,
+      });
     }
   }
   User.init({

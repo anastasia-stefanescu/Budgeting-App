@@ -2,9 +2,9 @@ import { GraphQLInt } from 'graphql';
 import db from '../../models/index.js';
 import groupType from '../types/groupType.js';
 
-const groupQueryResolver = async (_, { id}) => {
-    const group = await db.Group.FindOne({
-        where: { id: id },
+const groupQueryResolver = async (_, { id }) => {
+    const group = await db.Group.findOne({
+        where: { id },
     });
 
     if(!group)

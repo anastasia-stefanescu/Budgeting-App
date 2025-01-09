@@ -1,5 +1,5 @@
 import { GraphQLInt, GraphQLObjectType, GraphQLString, GraphQLList } from "graphql";
-import accountType from "./accountType.js";
+import userType from "./userType.js";
 
 const groupType = new GraphQLObjectType({
     name: 'Group',
@@ -8,9 +8,9 @@ const groupType = new GraphQLObjectType({
         name: { type: GraphQLString },
         description: { type: GraphQLString },
         members: {
-            type: new GraphQLList(accountType),
+            type: new GraphQLList(userType),
             resolve: async (group) => {
-                return await group.getMembers();
+                return await group.getUsers();
             }
         }
     }

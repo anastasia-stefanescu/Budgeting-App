@@ -8,7 +8,7 @@ export default (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Group.belongsToMany(models.Account, {
+      Group.belongsToMany(models.User, {
         through: models.Member,
       });
       Group.hasMany(models.GroupBudget, {
