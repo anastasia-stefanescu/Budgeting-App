@@ -13,6 +13,8 @@ import createTransactionMutation from '../mutations/transaction/createTransactio
 import createGroupMutation from '../mutations/group/createGroupMutation.js';
 import updateGroupMutation from '../mutations/group/updateGroupMutation.js';
 import deleteGroupMutation from '../mutations/group/deleteGroupMutation.js';
+import addMemberMutation from '../mutations/group/addMemberMutation.js';
+import removeMemberMutation from '../mutations/group/removeMemberMutation.js';
 
 const queryType = new graphql.GraphQLObjectType({
     name: "Mutation",
@@ -31,6 +33,8 @@ const queryType = new graphql.GraphQLObjectType({
         createGroup: createGroupMutation,
         updateGroup: updateGroupMutation,
         deleteGroup: deleteGroupMutation,
+        addMember: addMemberMutation,
+        removeMember: removeMemberMutation,
     }
 });
 

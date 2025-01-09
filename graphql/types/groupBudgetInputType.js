@@ -5,7 +5,7 @@ const groupBudgetInputType = new GraphQLInputObjectType({
     fields: {
         description: { type: GraphQLString },
         amount: { type: GraphQLInt },
-        userContribution : { type: GraphQLInt },
+        userContribution : { type: GraphQLInt }
     }
 });
 

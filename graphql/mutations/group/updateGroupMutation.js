@@ -22,10 +22,8 @@ const updateGroupMutationResolver = async (_, args, context) => {
             groupId: id,
         },
     });
-    if(!inGroup) {
-        console.log("Only members of the group can update the group");
+    if(!inGroup)
         return false;
-    }
 
     const updatedGroup = await group.update({
         ...args.group,

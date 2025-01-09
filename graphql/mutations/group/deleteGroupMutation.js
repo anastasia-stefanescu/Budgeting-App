@@ -20,10 +20,8 @@ const deleteGroupResolver = async (_, args, context) => {
             groupId: id,
         },
     });
-    if(!inGroup) {
-        console.log("Only members of the group can delete the group");
+    if(!inGroup)
         return false;
-    }
 
     await group.destroy();
 
