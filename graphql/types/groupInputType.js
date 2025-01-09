@@ -8,4 +8,4 @@ const groupInputType = new GraphQLInputObjectType({
     }
 });
 
-export default { groupInputType };
+export default groupInputType;

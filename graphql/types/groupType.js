@@ -1,6 +1,5 @@
-import { GraphQLInt, GraphQLObjectType, GraphQLString } from "graphql";
-import { accountType } from "./accountType";
-import { groupBudgetType } from './groupBudgetType';
+import { GraphQLInt, GraphQLObjectType, GraphQLString, GraphQLList } from "graphql";
+import accountType from "./accountType.js";
 
 const groupType = new GraphQLObjectType({
     name: 'Group',
@@ -13,14 +12,8 @@ const groupType = new GraphQLObjectType({
             resolve: async (group) => {
                 return await group.getMembers();
             }
-        },
-        budgets: {
-            type: new GraphQLList(groupBudgetType),
-            resolve: async (group) => {
-                return await group.getBudgets();
-            }
         }
     }
 });
 
-export default { groupType };
+export default groupType;

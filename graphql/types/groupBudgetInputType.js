@@ -9,4 +9,4 @@ const groupBudgetInputType = new GraphQLInputObjectType({
     }
 });
 
-export default { groupBudgetInputType };
+export default groupBudgetInputType;

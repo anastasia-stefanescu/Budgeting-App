@@ -1,6 +1,6 @@
-import { GraphQLInt } from 'graphql';
+import { GraphQLInt, GraphQLList } from 'graphql';
 import db from '../../models/index.js';
-import { accountType } from '../types/accountType.js';
+import accountType from '../types/accountType.js';
 
 const memberQueryResolver = async (_, { accountId, groupId }) => {
     const member = await db.Member.findOne({
@@ -38,7 +38,7 @@ const membersQueryResolver = async (_, { groupId }) => {
     return accounts;
 };
 
-const memberQuery = {
+export const memberQuery = {
     type: accountType,
     args: {
         accountId: { type: GraphQLInt },
@@ -47,12 +47,10 @@ const memberQuery = {
     resolve: memberQueryResolver,
 };
 
-const membersQuery = {
+export const membersQuery = {
     type: new GraphQLList(accountType),
     args: {
         groupId: { type: GraphQLInt },
     },
     resolve: membersQueryResolver,
 };
-
-export default { memberQuery, membersQuery };

@@ -1,6 +1,6 @@
 import { GraphQLInt, GraphQLObjectType, GraphQLString } from "graphql";
-import { groupType } from "./groupType";
-import { accountType } from './accountType';
+import groupType from "./groupType.js";
+import accountType from "./accountType.js";
 
 const groupBudgetType = new GraphQLObjectType({
     name: 'GroupBudget',
@@ -27,4 +27,4 @@ const groupBudgetType = new GraphQLObjectType({
     }
 });
 
-export default { groupBudgetType };
+export default groupBudgetType;

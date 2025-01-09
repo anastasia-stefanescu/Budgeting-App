@@ -1,6 +1,6 @@
-import { GraphQLInt } from 'graphql';
+import { GraphQLInt, GraphQLList } from 'graphql';
 import db from '../../models/index.js';
-import { groupBudgetType } from '../types/groupBudgetType.js';
+import groupBudgetType from '../types/groupBudgetType.js';
 
 const groupBudgetQueryResolver = async (_, { id }) => {
     const budget = await db.Member.findOne({
@@ -21,7 +21,7 @@ const groupBudgetsQueryResolver = async (_, { groupId }) => {
     return budgets;
 };
 
-const groupBudgetQuery = {
+export const groupBudgetQuery = {
     type: groupBudgetType,
     args: {
         id: { type: GraphQLInt },
@@ -29,12 +29,10 @@ const groupBudgetQuery = {
     resolve: groupBudgetQueryResolver,
 };
 
-const groupBudgetsQuery = {
+export const groupBudgetsQuery = {
     type: new GraphQLList(groupBudgetType),
     args: {
         groupId: { type: GraphQLInt },
     },
     resolve: groupBudgetsQueryResolver,
 };
-
-export default { groupBudgetQuery, groupBudgetsQuery };
