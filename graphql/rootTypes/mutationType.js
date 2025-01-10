@@ -15,6 +15,10 @@ import updateGroupMutation from '../mutations/group/updateGroupMutation.js';
 import deleteGroupMutation from '../mutations/group/deleteGroupMutation.js';
 import addMemberMutation from '../mutations/group/addMemberMutation.js';
 import removeMemberMutation from '../mutations/group/removeMemberMutation.js';
+import createGroupBudgetMutation from '../mutations/groupBudget/createGroupBudgetMutation.js';
+import updateGroupBudgetMutation from '../mutations/groupBudget/updateGroupBudgetMutation.js';
+import deleteGroupBudgetMutation from '../mutations/groupBudget/deleteGroupBudgetMutation.js';
+import createGroupTransferMutation from '../mutations/groupTransfer/createGroupTransferMutation.js';
 
 const queryType = new graphql.GraphQLObjectType({
     name: "Mutation",
@@ -35,6 +39,10 @@ const queryType = new graphql.GraphQLObjectType({
         deleteGroup: deleteGroupMutation,
         addMember: addMemberMutation,
         removeMember: removeMemberMutation,
+        createGroupBudget: createGroupBudgetMutation,
+        updateGroupBudget: updateGroupBudgetMutation,
+        deleteGroupBudget: deleteGroupBudgetMutation,
+        createGroupTransfer: createGroupTransferMutation
     }
 });
 
