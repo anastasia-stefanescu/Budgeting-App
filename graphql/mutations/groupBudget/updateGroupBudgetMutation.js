@@ -8,6 +8,13 @@ const updateGroupBudgetMutationResolver = async (_, args, context) => {
     if(!isAuthorized)
         return false;
 
+    //check if group exists
+        const group = await db.Group.findOne({
+            where: { id: context.group_id },
+        });
+        if(!group)
+            return false;
+
     //check if user is member in group
     const inGroup = await db.Member.findOne({
          where: {
@@ -18,6 +25,7 @@ const updateGroupBudgetMutationResolver = async (_, args, context) => {
     if(!inGroup)
         return false;
 
+    //check if budget exists
     const budget = await db.GroupBudget.findOne({
         where: { id: args.id }
     });

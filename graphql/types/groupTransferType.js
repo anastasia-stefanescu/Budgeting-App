@@ -17,7 +17,7 @@ const groupTransferType = new GraphQLObjectType({
         budget: {
             type: groupBudgetType,
             resolve: async (groupTransfer) => {
-                return await groupTransfer.getBudget();
+                return await groupTransfer.getGroupBudget();
             }
         },
     }

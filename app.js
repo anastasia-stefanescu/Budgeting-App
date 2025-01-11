@@ -20,10 +20,12 @@ const jwtMiddleware = (req, res, next) => {
     const account_context = req.headers.accountcontext;
     const budget_context = req.headers.budgetcontext;
     const group_context = req.headers.groupcontext;
+    const group_budget_context = req.headers.groupbudgetcontext;
 
     if (account_context) req.account_id = account_context;
     if (budget_context) req.budget_id = budget_context;
     if (group_context) req.group_id = group_context;
+    if (group_budget_context) req.group_budget_id = group_budget_context;
 
     if(!token) {
         next();
@@ -55,6 +57,7 @@ app.all(
                 account_id: req.raw.account_id,
                 budget_id: req.raw.budget_id,
                 group_id: req.raw.group_id,
+                group_budget_id: req.raw.group_budget_id,
             }
         }
     })

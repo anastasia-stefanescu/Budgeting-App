@@ -27,7 +27,7 @@ module.exports = {
         allowNull: false,
         references: {
           model: {
-            tableName: 'Budgets',
+            tableName: 'GroupBudgets',
           },
           key: 'id',
         }
