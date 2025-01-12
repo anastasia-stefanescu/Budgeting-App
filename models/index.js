@@ -5,8 +5,11 @@ import path from 'path';
 import { Sequelize } from 'sequelize';
 import process from 'process';
 import config from '../config/config.js';
+import { pathToFileURL, fileURLToPath } from 'url';
 
 const env = process.env.NODE_ENV || 'development';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 let sequelize;
 

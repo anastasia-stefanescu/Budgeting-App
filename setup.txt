@@ -18,7 +18,12 @@ COMENZI TABELE (eventual --force pentru suprascriere)
   npx sequelize-cli model:generate --name Account --attributes IBAN:string,cardNo:string,balance:number,userId:integer
   npx sequelize-cli model:generate --name Budget --attributes name:string,balance:number,accountId:integer
   npx sequelize-cli model:generate --name Transaction --attributes description:string,date:string,amount:number,recipient:string,accountId:integer,budgetId:integer
-  
+
+  npx sequelize-cli model:generate --name Group --attributes name:string, description:string  
+  npx sequelize-cli model:generate --name GroupBudget --attributes description:string, amount:number, amountPaid:number, userContribution:number, accountId:integer, groupId:integer
+  npx sequelize-cli model:generate --name Member --attributes accountId:integer, groupId:integer
+  npx sequelize-cli model:generate --name GroupBudgetPay --attributes amount:number, accountId:integer, budgetId:integer
+
   In folderul models, dupa ce se genereaza modelele trebuie modificat:
   - 'require' => 'import {Model} from 'sequelize'
   - 'models.exports' => 'export default';
