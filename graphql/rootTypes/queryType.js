@@ -8,6 +8,7 @@ import { groupBudgetQuery, groupBudgetsQuery } from '../queries/groupBudgetQueri
 import { groupTransferQuery, groupTransfersQuery } from '../queries/groupTransferQueries.js';
 import { memberQuery, membersQuery } from '../queries/memberQueries.js';
 import { budgetPaidListQuery, budgetUnpaidListQuery, budgetStatisticsQuery } from '../queries/groupBudgetStatistics.js';
+import { groupStatisticsQuery, groupUserStatisticsQuery } from '../queries/groupStatistics.js';
 
 const queryType = new GraphQLObjectType({
     name: "Query",
@@ -30,6 +31,8 @@ const queryType = new GraphQLObjectType({
         budgetPaidList: budgetPaidListQuery,
         budgetUnpaidList: budgetUnpaidListQuery,
         budgetStatistics: budgetStatisticsQuery,
+        groupStatistics: groupStatisticsQuery,
+        groupUserStatistics: groupUserStatisticsQuery,
     },
 });
 
