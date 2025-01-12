@@ -29,7 +29,7 @@ const models = await Promise.all(fs
     );
   })
   .map(async file => {
-    const module = await import(path.join(import.meta.dirname, file));
+    const module = await import(pathToFileURL(path.join(__dirname, file)).href);
     return module.default(sequelize, Sequelize.DataTypes);
   })
 );
