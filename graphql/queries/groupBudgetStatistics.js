@@ -171,7 +171,7 @@ export const budgetUnpaidListQuery = {
     resolve: budgetUnpaidListResolver,
 };
 
-export const budgetStatisticsQuery = {
+export const groupBudgetStatisticsQuery = {
     type: groupBudgetStatisticsType,
     args: {
         budgetId: { type: GraphQLInt },

@@ -1,5 +1,4 @@
-import { budgetStatisticsType } from "../types/budgetStatisticsType.js";
-import transaction from "../../models/transaction.js";
+import budgetStatisticsType from "../types/budgetStatisticsType.js";
 import db from "../../models/index.js";
 import { GraphQLInt } from "graphql";
 
@@ -14,7 +13,7 @@ const budgetStatisticsQueryResolver = async (_, args, context) => {
         console.log("Not authorized");
         return false;
     }
-    const budget = await db.budget.findOne({ where: { id: args.budgetId } });
+    const budget = await db.Budget.findOne({ where: { id: args.budgetId } });
     if (!budget) {
         return false;
     }
@@ -30,7 +29,7 @@ const budgetStatisticsQueryResolver = async (_, args, context) => {
         amountPaidByBudget += transaction.amount;
     }
 
-    const initialBalance = budget.balance + amountPaidBybudget;
+    const initialBalance = budget.balance + amountPaidByBudget;
     const currentBalance = budget.balance;
 
     const budgetStatistic = {

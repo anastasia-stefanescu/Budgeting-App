@@ -1,5 +1,4 @@
-import { accountStatisticsType } from "../types/accountStatisticsType.js";
-import transaction from "../../models/transaction.js";
+import  accountStatisticsType  from "../types/accountStatisticsType.js";
 import db from "../../models/index.js";
 import { GraphQLInt } from "graphql";
 
@@ -30,7 +29,7 @@ const accountStatisticsQueryResolver = async (_, args, context) => {
     const budgets = await db.Budget.findAll({ where: { accountId: args.accountId } });
 
     const outgoingTransactions = await db.Transaction.findAll({ where: { accountId: args.accountId } });
-
+    console.log('OUTGOING:',outgoingTransactions.length);
     const incomingTransactions = await db.Transaction.findAll({ where: { recipient: account.IBAN } });
 
     // call budget statistics query
@@ -65,7 +64,7 @@ const accountStatisticsQueryResolver = async (_, args, context) => {
         initialBalance : initialBalance,
         currentBalance: currentBalance,
         incomingTransactions: numberOfIncomingTransactions,
-        outgoingTransactionsutgoingTransactions: numberOfOutgoingTransactions,
+        outgoingTransactions: numberOfOutgoingTransactions,
         incomingSum: amountOfIncomingTransactions,
         outgoingSum: amountOfOutgoingTransactions,
         numberOfBudgets: budgets.length,

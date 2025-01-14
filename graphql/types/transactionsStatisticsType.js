@@ -3,9 +3,6 @@ import { GraphQLInt, GraphQLObjectType, GraphQLString } from "graphql";
 const transactionsStatisticsType = new GraphQLObjectType({
     name: 'TransactionsStatistics',
     fields: {
-        id: { type: GraphQLInt },
-        description: { type: GraphQLString },
-
         accountId: { type: GraphQLInt },
         budgetId: { type: GraphQLInt},
 
@@ -17,4 +14,4 @@ const transactionsStatisticsType = new GraphQLObjectType({
     }
 });
 
-export default groupStatisticsType;
+export default transactionsStatisticsType;

@@ -1,53 +1,81 @@
-import { budgetStatisticsType } from "../types/budgetStatisticsType.js";
+import transactionsStatisticsType from "../types/transactionsStatisticsType.js";
 import transaction from "../../models/transaction.js";
 import db from "../../models/index.js";
-import { GraphQLInt } from "graphql";
+import { GraphQLInt, GraphQLString } from "graphql";
 
-//initial balance, current balance
+function compare_dates(stringdate, stringbegin, stringend) {
+    const date = new Date(stringdate);
+    const begin = new Date(stringbegin);
+    const end = new Date(stringend);
 
-// number transactions
+    return date >= begin && date <= end;
+}
 
-const budgetStatisticsQueryResolver = async (_, args, context) => {
-    const isAuthorized = !!context.user_id && !!context.account_id && !!context.budget_id;
+const transactionsStatisticsQueryResolver = async (_, args, context) => {
+    const isAuthorized = !!context.user_id;
 
     if (!isAuthorized) {
         console.log("Not authorized");
         return false;
     }
-    const budget = await db.budget.findOne({ where: { id: args.budgetId } });
-    if (!budget) {
-        return false;
+
+    let aux_transactions;
+    if (args.accountId && args.budgetId) {
+        console.log( ' using account and budget');
+
+        aux_transactions = await db.Transaction.findAll({ where: { accountId: args.accountId, budgetId: args.budgetId, }});
+        
+    }  else {
+        if (args.accountId)  {
+            console.log('  using account');
+            aux_transactions = await db.Transaction.findAll({ where: { accountId: args.accountId } });
+        }
+        else{
+            console.log('no account nor budget');
+            aux_transactions = await db.Transaction.findAll();
+        }
+        
     }
-    if (budget.accountId !== Number(context.account_id)) {
-        console.log("Accounts can only see their own budgets");
+    if (!aux_transactions) {
         return false;
     }
 
-    const transactions = await db.Transaction.findAll({ where: { budgetId: args.budgetId } });
+    const transactions = aux_transactions.filter(transaction => compare_dates(transaction.date, args.begin, args.end));
 
-    let amountPaidByBudget = 0;
+    if (!transactions) {
+        console.log("No transactions found");
+        return false;
+    }
+
+
+    let amountPaidByTransactions = 0;
     for (const transaction of transactions) {
-        amountPaidByBudget += transaction.amount;
+        amountPaidByTransactions += transaction.amount;
     }
 
-    const initialBalance = budget.balance + amountPaidBybudget;
-    const currentBalance = budget.balance;
+    const initialBalance = transactions.balance + amountPaidByTransactions;
+    const currentBalance = transactions.balance;
 
-    const budgetStatistic = {
-        id: budget.id,
-        initialBalance : initialBalance,
-        currentBalance: currentBalance,
+    const transactionsStatistic = {
+        accountId: args.accountId,
+        budgetId: args.budgetId,
         numberTransactions: transactions.length,
+        amount: amountPaidByTransactions,
+        begin: args.begin,
+        end: args.end
     };
 
-    return budgetStatistic;
+    return transactionsStatistic;
 
     }
 
-export const budgetStatisticsQuery = {
-    type: budgetStatisticsType,
+export const transactionsStatisticsQuery = {
+    type: transactionsStatisticsType,
     args: {
+        accountId: { type: GraphQLInt },
         budgetId: { type: GraphQLInt },
+        begin: { type: GraphQLString },
+        end: { type: GraphQLString },
     },
-    resolve: budgetStatisticsQueryResolver,
+    resolve: transactionsStatisticsQueryResolver,
 };
