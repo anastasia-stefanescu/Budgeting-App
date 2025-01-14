@@ -1,0 +1,455 @@
+mutation createUser1 {
+  createUser(user: {name: "Fabian", password: "123456"}) {
+    id
+    name
+  }
+}
+
+mutation createUser2 {
+  createUser(user: {name: "Andrei", password: "123456"}) {
+    id
+    name
+  }
+}
+
+mutation createUser3 {
+  createUser(user: {name: "Eduard", password: "123456"}) {
+    id
+    name
+  }
+}
+
+mutation createUser4 {
+  createUser(user: {name: "Anastasia", password: "123456"}) {
+    id
+    name
+  }
+}
+
+mutation createUser5 {
+  createUser(user: {name: "Corina", password: "123456"}) {
+    id
+    name
+  }
+}
+
+mutation Login2 {
+  login (credentials: {username: "Andrei", password: "123456"}) {
+    token
+  }
+}
+
+mutation Login4 {
+  login (credentials: {username: "Anastasia", password: "123456"}) {
+    token
+  }
+}
+
+mutation Login1 {
+  login (credentials: {username: "Fabian", password: "123456"}) {
+    token
+  }
+}
+
+mutation createAccount2 {
+  createAccount(account: {balance: 1000}) {
+    id 
+    IBAN
+    cardNo
+    balance
+    author {
+      id
+      name
+    }
+  }
+}
+
+mutation createAccount4 {
+  createAccount(account: {balance: 10000}) {
+    id 
+    IBAN
+    cardNo
+    balance
+    author {
+      id
+      name
+    }
+  }
+}
+
+mutation createAccount1 {
+  createAccount(account: {balance: 4400}) {
+    id 
+    IBAN
+    cardNo
+    balance
+    author {
+      id
+      name
+    }
+  }
+}
+
+mutation createGroup {
+  createGroup(group: {name: "Vacanta", description: "Plecare la Brasov"}) {
+      id
+      name
+      description
+      members {
+        id
+        name
+      }
+  }
+}
+
+mutation createGroupBudget1 {
+    createGroupBudget(groupBudget: {description: "Avans acomodare", amount: 500, userContribution: 100}){ 
+    id
+    description
+    amount
+    amountPaid
+    userContribution
+    account {
+      id
+      IBAN
+      author {
+        id
+        name
+      }
+    } 
+    group {
+      id
+    }
+  }
+}
+
+
+mutation deleteGroup {
+  deleteGroup(id: 1)
+}
+
+mutation updateGroup{
+  updateGroup(group: {description: "Plecare la Brasov pe 16 ianuarie"}, id: 2){
+    id
+    name
+    description
+    members {
+        id
+        name
+      }
+  }
+}
+
+mutation addMember2 {
+  addMember(groupId: 2, userId: 2) {
+    id
+    members {
+      id
+      name
+    }
+  }
+}
+
+mutation addMember3 {
+  addMember(groupId: 2, userId: 3) {
+    id
+    members {
+      id
+      name
+    }
+  }
+}
+
+mutation addMember4 {
+  addMember(groupId: 2, userId: 4) {
+    id
+    members {
+      id
+      name
+    }
+  }
+}
+
+mutation addMember5 {
+  addMember(groupId: 2, userId: 5) {
+    id
+    members {
+      id
+      name
+    }
+  }
+}
+
+mutation createGroupBudget2 {
+    createGroupBudget(groupBudget: {description: "Transport", amount: 380, userContribution: 80}){ 
+    id
+    description
+    amount
+    amountPaid
+    userContribution
+    account {
+      id
+      IBAN
+      author {
+        id
+        name
+      }
+    } 
+    group {
+      id
+    }
+  }
+}
+
+mutation createGroupBudget3 {
+    createGroupBudget(groupBudget: {description: "Bautura", amount: 300, userContribution: 0}){ 
+    id
+    description
+    amount
+    amountPaid
+    userContribution
+    account {
+      id
+      IBAN
+      author {
+        id
+        name
+      }
+    } 
+    group {
+      id
+    }
+  }
+}
+
+query getGroupBudgets {
+  groupBudgets(groupId: 2) {
+    id
+    description
+  }
+}
+
+query getGroupBudget {
+  groupBudget(id: 2){
+    id
+    description
+    amount
+    amountPaid
+    userContribution
+    account {
+      id
+      IBAN
+      author {
+        id
+        name
+      }
+    } 
+    group {
+      id
+    }
+  }
+}
+
+mutation updateGroupBudget1 {
+  updateGroupBudget(id: 2, groupBudget: {description: "Plata acomodare", amount: 2000}){
+    id
+    description
+    amount
+    amountPaid
+    userContribution
+  }
+}
+
+mutation deleteGroupBudget3 {
+  deleteGroupBudget(id: 4)
+}
+
+mutation removeMember3 {
+  removeMember(groupId: 2, userId: 3) {
+    id
+    name
+    description
+    members {
+      id
+      name
+    }
+  }
+}
+
+query getMembers {
+  members(groupId: 2) {
+    id
+    name
+  }
+}
+
+query getMember {
+  member(groupId: 2, userId: 2) {
+    id
+    name
+  }
+}
+
+mutation createGroupTransfer1 {
+    createGroupTransfer(groupTransfer: {amount: 500}){
+      id
+      amount
+      createdAt
+      account {
+        id
+        IBAN
+        balance
+        author {
+          id
+          name
+        } 
+      }
+      budget {
+        id
+        description
+        amount
+        amountPaid
+        group {
+          id
+          name
+          description
+        }
+        account {
+          id
+          IBAN
+          balance
+          author {
+            id
+            name
+          }
+        }
+      } 
+    }
+}
+
+mutation createGroupTransfer2 {
+    createGroupTransfer(groupTransfer: {amount: 100}){
+      id
+      amount
+      createdAt
+      account {
+        id
+        IBAN
+        balance
+        author {
+          id
+          name
+        } 
+      }
+      budget {
+        id
+        description
+        amount
+        amountPaid
+        group {
+          id
+          name
+          description
+        }
+        account {
+          id
+          IBAN
+          balance
+          author {
+            id
+            name
+          }
+        }
+      } 
+    }
+}
+
+query getGroupTranfers {
+  groupTransfers(budgetId: 2) {
+    id
+    amount
+    createdAt
+    account {
+      IBAN
+    }
+    budget {
+      id
+      description
+      account {
+        IBAN
+      }
+    }
+  }
+}
+
+query getGroupTransfer {
+  groupTransfer(id: 3) {
+    id
+    amount
+    createdAt
+    account {
+      IBAN
+    }
+    budget {
+      id
+      description
+      account {
+        IBAN
+      }
+    }
+  }
+}
+
+query groupBudgetPaidList {
+  groupBudgetPaidList(budgetId: 2){
+    id
+    name
+    contribution
+  }
+}
+
+query groupBudgetUnpaidList {
+  groupBudgetUnpaidList(budgetId: 2){
+    id
+    name
+  }
+}
+
+query groupBudgetStatistics {
+  groupBudgetStatistics(budgetId: 3){
+    id
+    description
+    amount
+    amountPaid
+    userContribution
+    numberPaid
+    numberPaid
+    procPaid
+    overBudget
+  }
+}
+
+query groupStatistics {
+  groupStatistics(groupId: 2) {
+    id
+    name
+    description
+    totalBudget
+    totalBudgetPaid
+    procPaid
+    nrBudgets
+    nrBudgetsPaid
+    procBudgetsPaid
+    nrMembers
+  }
+}
+
+query groupUserStatistics {
+  groupUserStatistics(groupId: 2){
+    id
+    name
+    totalContribution
+    nrBudgetsPaid
+    procBudgetsPaid
+  }
+}

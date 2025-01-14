@@ -106,7 +106,7 @@ const budgetStatisticsResolver = async (_, { budgetId }) => {
     if(!budget) 
         return null;
 
-    const procPaid = (budget.amountPaid / budget.amount) * 100;
+    const procPaid = Math.trunc((budget.amountPaid / budget.amount) * 100);
 
     const transfers = await db.GroupTransfer.findAll({
         where: { budgetId: budgetId },
@@ -155,7 +155,7 @@ const budgetStatisticsResolver = async (_, { budgetId }) => {
     };
 };
 
-export const budgetPaidListQuery = {
+export const groupBudgetPaidListQuery = {
     type: new GraphQLList(userContributionType),
     args: {
         budgetId: { type: GraphQLInt },
@@ -163,7 +163,7 @@ export const budgetPaidListQuery = {
     resolve: budgetPaidListResolver,
 };
 
-export const budgetUnpaidListQuery = {
+export const groupBudgetUnpaidListQuery = {
     type: new GraphQLList(userType),
     args: {
         budgetId: { type: GraphQLInt },
@@ -171,7 +171,7 @@ export const budgetUnpaidListQuery = {
     resolve: budgetUnpaidListResolver,
 };
 
-export const budgetStatisticsQuery = {
+export const groupBudgetStatisticsQuery = {
     type: groupBudgetStatisticsType,
     args: {
         budgetId: { type: GraphQLInt },

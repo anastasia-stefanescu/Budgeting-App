@@ -1,4 +1,5 @@
-import { budgetStatisticsType } from "../types/budgetStatisticsType.js";
+import budgetStatisticsType from "../types/budgetStatisticsType.js";
+import transactionStatisticsType from "../types/transactionsStatistics.js";
 import transaction from "../../models/transaction.js";
 import db from "../../models/index.js";
 import { GraphQLInt } from "graphql";
@@ -7,7 +8,7 @@ import { GraphQLInt } from "graphql";
 
 // number transactions
 
-const budgetStatisticsQueryResolver = async (_, args, context) => {
+const transactionsStatisticsQueryResolver = async (_, args, context) => {
     const isAuthorized = !!context.user_id && !!context.account_id && !!context.budget_id;
 
     if (!isAuthorized) {
@@ -44,10 +45,10 @@ const budgetStatisticsQueryResolver = async (_, args, context) => {
 
     }
 
-export const budgetStatisticsQuery = {
-    type: budgetStatisticsType,
+export const transactionsStatisticsQuery = {
+    type: transactionStatisticsType,
     args: {
         budgetId: { type: GraphQLInt },
     },
-    resolve: budgetStatisticsQueryResolver,
+    resolve: transactionsStatisticsQueryResolver,
 };

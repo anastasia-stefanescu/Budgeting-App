@@ -20,6 +20,8 @@ module.exports = {
             tableName: 'Accounts',
           },
           key: 'id',
+          onDelete: 'CASCADE',
+          onUpdate: 'CASCADE'
         }
       },
       budgetId: {
@@ -30,6 +32,8 @@ module.exports = {
             tableName: 'GroupBudgets',
           },
           key: 'id',
+          onDelete: 'CASCADE',
+          onUpdate: 'CASCADE'
         }
       },
       createdAt: {

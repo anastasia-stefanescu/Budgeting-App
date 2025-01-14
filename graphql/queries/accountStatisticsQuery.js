@@ -1,4 +1,4 @@
-import { accountStatisticsType } from "../types/accountStatisticsType.js";
+import accountStatisticsType from "../types/accountStatisticsType.js";
 import transaction from "../../models/transaction.js";
 import db from "../../models/index.js";
 import { GraphQLInt } from "graphql";

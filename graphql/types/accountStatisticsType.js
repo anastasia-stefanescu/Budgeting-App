@@ -1,6 +1,6 @@
 import { GraphQLInt, GraphQLObjectType, GraphQLString } from "graphql";
 
-const groupStatisticsType = new GraphQLObjectType({
+const accountStatisticsType = new GraphQLObjectType({
     name: 'AccountStatistics',
     fields: {
         id: { type: GraphQLInt },
@@ -17,4 +17,4 @@ const groupStatisticsType = new GraphQLObjectType({
     }
 });
 
-export default groupStatisticsType;
+export default accountStatisticsType;

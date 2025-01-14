@@ -9,11 +9,11 @@ const updateGroupBudgetMutationResolver = async (_, args, context) => {
         return false;
 
     //check if group exists
-        const group = await db.Group.findOne({
-            where: { id: context.group_id },
-        });
-        if(!group)
-            return false;
+    const group = await db.Group.findOne({
+        where: { id: context.group_id },
+    });
+    if(!group)
+        return false;
 
     //check if user is member in group
     const inGroup = await db.Member.findOne({
@@ -32,7 +32,7 @@ const updateGroupBudgetMutationResolver = async (_, args, context) => {
     if(!budget)
         return false;
     //check if budget belongs to group
-    if(budget.groupId !== context.group_id)
+    if(budget.groupId != context.group_id)
         return false;
     
     //check if budget belongs to user

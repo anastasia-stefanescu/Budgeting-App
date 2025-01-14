@@ -17,4 +17,4 @@ const transactionsStatisticsType = new GraphQLObjectType({
     }
 });
 
-export default groupStatisticsType;
+export default transactionsStatisticsType;

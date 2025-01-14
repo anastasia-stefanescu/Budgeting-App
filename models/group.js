@@ -13,6 +13,8 @@ export default (sequelize, DataTypes) => {
       });
       Group.hasMany(models.GroupBudget, {
         foreignKey: "groupId",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
       });
     }
   }
