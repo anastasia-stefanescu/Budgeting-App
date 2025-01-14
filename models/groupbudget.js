@@ -19,6 +19,8 @@ export default (sequelize, DataTypes) => {
       GroupBudget.hasMany(models.GroupTransfer, {
         foreignKey: 'budgetId',
         as: "groupTransfers",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
       });
     }
   }

@@ -23,10 +23,14 @@ export default (sequelize, DataTypes) => {
       Account.hasMany(models.GroupBudget, {
         foreignKey: "accountId",
         as: "groupBudgets",// the alias not necessary!
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
       });
       Account.hasMany(models.GroupTransfer, {
         foreignKey: "accountId",
         as: "groupTransfers",// the alias not necessary!
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
       });
     }
   }

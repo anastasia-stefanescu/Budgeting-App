@@ -32,7 +32,7 @@ const deleteGroupBudgetMutationResolver = async (_, args, context) => {
     if(!budget)
         return false;
     //check if budget belongs to group
-    if(budget.groupId !== context.group_id)
+    if(budget.groupId != context.group_id)
         return false;
     
     //check if budget belongs to user
@@ -43,6 +43,14 @@ const deleteGroupBudgetMutationResolver = async (_, args, context) => {
         return false;
     if(account.userId !== context.user_id)
         return false;
+
+     const groupTransfers = await db.GroupTransfer.findAll({
+        where: { budgetId: budget.id },
+    });
+    
+    for (let j = 0; j < groupTransfers.length; j++) {
+        await groupTransfers[j].destroy();
+    }
 
     await budget.destroy();
 

@@ -11,8 +11,8 @@ function compare_dates(stringdate, stringbegin, stringend) {
     return date >= begin && date <= end;
 }
 
-const transactionsStatisticsQueryResolver = async (_, args, context) => {
-    const isAuthorized = !!context.user_id;
+const budgetStatisticsQueryResolver = async (_, args, context) => {
+    const isAuthorized = !!context.user_id && !!context.account_id && !!context.budget_id;
 
     if (!isAuthorized) {
         console.log("Not authorized");
@@ -69,8 +69,8 @@ const transactionsStatisticsQueryResolver = async (_, args, context) => {
 
     }
 
-export const transactionsStatisticsQuery = {
-    type: transactionsStatisticsType,
+export const budgetStatisticsQuery = {
+    type: budgetStatisticsType,
     args: {
         accountId: { type: GraphQLInt },
         budgetId: { type: GraphQLInt },

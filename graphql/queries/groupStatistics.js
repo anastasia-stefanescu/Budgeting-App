@@ -29,8 +29,8 @@ const groupStatisticsResolver = async (_, { groupId }) => {
         nrBudgets++;
     }
 
-    let procPaid = totalBudgetPaid / totalBudget * 100;
-    let procBudgetsPaid = nrBudgetsPaid / nrBudgets * 100;
+    let procPaid = Math.trunc(totalBudgetPaid / totalBudget * 100);
+    let procBudgetsPaid = Math.trunc(nrBudgetsPaid / nrBudgets * 100);
 
     //calculate number of members
     const members = await db.Member.findAll({
@@ -90,7 +90,7 @@ const groupUserStatisticsResolver = async (_, { groupId }) => {
         const user = await db.User.findOne({
             where: { id: userId },
         });
-        users.push({id: userId, name: user.name, totalContribution: usersMap.get(userId)[0], nrBudgetsPaid: usersMap.get(userId)[1], procBudgetsPaid: usersMap.get(userId)[1] / nrBudgets * 100});
+        users.push({id: userId, name: user.name, totalContribution: usersMap.get(userId)[0], nrBudgetsPaid: usersMap.get(userId)[1], procBudgetsPaid: Math.trunc(usersMap.get(userId)[1] / nrBudgets * 100)});
     }
 
     return users;

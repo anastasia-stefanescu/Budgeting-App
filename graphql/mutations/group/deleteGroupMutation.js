@@ -23,6 +23,23 @@ const deleteGroupResolver = async (_, args, context) => {
     if(!inGroup)
         return false;
 
+    const groupBudgets = await db.GroupBudget.findAll({
+        where: { groupId: id },
+    });
+
+    for (let i = 0; i < groupBudgets.length; i++) {
+        const groupBudgetId = groupBudgets[i].id;
+        const groupTransfers = await db.GroupTransfer.findAll({
+            where: { budgetId: groupBudgetId },
+        });
+
+        for (let j = 0; j < groupTransfers.length; j++) {
+            await groupTransfers[j].destroy();
+        }
+
+        await groupBudgets[i].destroy();
+    }
+
     await group.destroy();
 
     return true;

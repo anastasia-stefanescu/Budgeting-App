@@ -10,7 +10,7 @@ const groupTransferQueryResolver = async (_, { id }) => {
     if(!transfer) 
         return null;
 
-    return Transfer;
+    return transfer;
 };
 
 const groupTransfersQueryResolver = async (_, { budgetId }) => {

@@ -41,7 +41,7 @@ const membersQueryResolver = async (_, { groupId }) => {
 export const memberQuery = {
     type: userType,
     args: {
-        accountId: { type: GraphQLInt },
+        userId: { type: GraphQLInt },
         groupId: { type: GraphQLInt },
     },
     resolve: memberQueryResolver,

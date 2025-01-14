@@ -29,7 +29,9 @@ module.exports = {
             tableName: 'Accounts',
           },
           key: 'id',
-        }
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
       groupId: {
         type: Sequelize.INTEGER,
@@ -39,6 +41,8 @@ module.exports = {
             tableName: 'Groups',
           },
           key: 'id',
+          onDelete: 'CASCADE',
+          onUpdate: 'CASCADE'
         }
       },
       createdAt: {

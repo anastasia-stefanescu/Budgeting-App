@@ -11,10 +11,14 @@ export default (sequelize, DataTypes) => {
       GroupTransfer.belongsTo(models.Account, {
         foreignKey: 'accountId',
         as: "account",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
       });
       GroupTransfer.belongsTo(models.GroupBudget, {
         foreignKey: 'budgetId',
         as: "groupBudget",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
       });
     }
   }

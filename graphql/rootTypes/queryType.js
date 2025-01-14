@@ -7,11 +7,10 @@ import { groupQuery } from '../queries/groupQueries.js';
 import { groupBudgetQuery, groupBudgetsQuery } from '../queries/groupBudgetQueries.js';
 import { groupTransferQuery, groupTransfersQuery } from '../queries/groupTransferQueries.js';
 import { memberQuery, membersQuery } from '../queries/memberQueries.js';
-import { budgetPaidListQuery, budgetUnpaidListQuery, groupBudgetStatisticsQuery } from '../queries/groupBudgetStatistics.js';
+import { groupBudgetPaidListQuery, groupBudgetUnpaidListQuery, groupBudgetStatisticsQuery } from '../queries/groupBudgetStatistics.js';
 import { groupStatisticsQuery, groupUserStatisticsQuery } from '../queries/groupStatistics.js';
 import { accountStatisticsQuery } from '../queries/accountStatisticsQuery.js';
-import { transactionsStatisticsQuery }from '../queries/transactionsStatisticsQuery.js';
-import { budgetStatisticsQuery } from '../queries/budgetStatisticsQuery.js';
+import { transactionsStatisticsQuery } from '../queries/transactionsStatisticsQuery.js';
 
 const queryType = new GraphQLObjectType({
     name: "Query",
@@ -25,7 +24,7 @@ const queryType = new GraphQLObjectType({
 
         budget: budgetQuery,
         budgets: budgetsQuery,
-        budgetStatistics: budgetStatisticsQuery,
+        //budgetStatistics: budgetStatisticsQuery,
 
         transaction: transactionQuery,
         transactions: transactionsQuery,
@@ -40,8 +39,8 @@ const queryType = new GraphQLObjectType({
         member: memberQuery,
         members: membersQuery,
 
-        budgetPaidList: budgetPaidListQuery,
-        budgetUnpaidList: budgetUnpaidListQuery,
+        groupBudgetPaidList: groupBudgetPaidListQuery,
+        groupBudgetUnpaidList: groupBudgetUnpaidListQuery,
 
         groupBudgetStatistics: groupBudgetStatisticsQuery,
         groupStatistics: groupStatisticsQuery,
