@@ -9,6 +9,7 @@ const accountsQueryResolver = async () => {
 }
 
 const accountQueryResolver = async (_, { id }) => {
+    console.log('INSIDE ACCOUNT FIND ONE!!');
     const account = await db.Account.findOne({
         where: {
             id,

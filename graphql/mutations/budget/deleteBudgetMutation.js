@@ -2,9 +2,10 @@ import {GraphQLBoolean, GraphQLInt} from 'graphql';
 import db from '../../../models/index.js';
 
 const deleteBudgetResolver = async (_, args, context) => {
-    const isAuthorized = !!context.account_id
+    const isAuthorized = !!context.user_id && !!context.account_id;
    
     if(!isAuthorized) {
+        console.log('Not authorized');
         return false;
     }
 
@@ -17,7 +18,7 @@ const deleteBudgetResolver = async (_, args, context) => {
     if (!budget) {
         return false;
     }
-    if (budget.accountId !== context.account_id)
+    if (budget.accountId !== Number(context.account_id))
         {
             console.log ("Accounts can only delete their own budgets");
             return false;

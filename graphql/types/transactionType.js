@@ -5,6 +5,7 @@ import budgetType from "./budgetType.js";
 const transactionType = new GraphQLObjectType({
     name: 'Transaction',
     fields: {
+        id: {type: GraphQLInt},
         description: {type: GraphQLString},
         date: { type: GraphQLString },
         amount: { type: GraphQLInt},

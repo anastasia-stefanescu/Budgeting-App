@@ -9,27 +9,38 @@ import { groupTransferQuery, groupTransfersQuery } from '../queries/groupTransfe
 import { memberQuery, membersQuery } from '../queries/memberQueries.js';
 import { budgetPaidListQuery, budgetUnpaidListQuery, budgetStatisticsQuery } from '../queries/groupBudgetStatistics.js';
 import { groupStatisticsQuery, groupUserStatisticsQuery } from '../queries/groupStatistics.js';
+import { accountStatisticsQuery } from '../queries/accountStatisticsQuery.js';
 
 const queryType = new GraphQLObjectType({
     name: "Query",
     fields: {
         user: userQuery,
         users: usersQuery,
+
         account: accountQuery,
         accounts: accountsQuery,
+        accountStatistics: accountStatisticsQuery,
+
         budget: budgetQuery,
         budgets: budgetsQuery,
+        budgetStatistics: budgetStatisticsQuery,
+
         transaction: transactionQuery,
         transactions: transactionsQuery,
+        transactionsStatistics: transactionsStatisticsQuery,
+
         group: groupQuery,
         groupBudget: groupBudgetQuery,
         groupBudgets: groupBudgetsQuery,
         groupTransfer: groupTransferQuery,
         groupTransfers: groupTransfersQuery,
+
         member: memberQuery,
         members: membersQuery,
+
         budgetPaidList: budgetPaidListQuery,
         budgetUnpaidList: budgetUnpaidListQuery,
+
         budgetStatistics: budgetStatisticsQuery,
         groupStatistics: groupStatisticsQuery,
         groupUserStatistics: groupUserStatisticsQuery,

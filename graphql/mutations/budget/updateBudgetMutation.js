@@ -3,10 +3,11 @@ import budgetInputType from '../../types/budgetInputType.js';
 import budgetType from '../../types/budgetType.js';
 import db from '../../../models/index.js';
 
-const updateBudgetMutationResolver = async (_, args) => {
-    const isAuthorized = !!context.account_id
+const updateBudgetMutationResolver = async (_, args, context) => {
+    const isAuthorized = !!context.user_id && !!context.account_id
    
     if(!isAuthorized) {
+        console.log('Not authorized');
         return false;
     }
     
@@ -21,7 +22,9 @@ const updateBudgetMutationResolver = async (_, args) => {
     if(!budget) {
         return false;
     }
-    if (budget.accountId !== context.account_id)
+
+    console.log('budget.accountId', budget.accountId, 'context.account_id', context.account_id);
+    if ( budget.accountId !== Number(context.account_id))
         {
             console.log ("Accounts can only update their own budgets");
             return false;

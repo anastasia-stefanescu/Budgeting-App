@@ -111,7 +111,60 @@ mutation DeleteAccount {
   deleteAccount(id: 6)
 }
 
+mutation CreateBudget {
+  createBudget(budget: {
+    name: " Budget for groceries ",
+    balance: 19000
+  }){
+    name
+    balance
+    account {
+      id
+      IBAN
+      cardNo
+      balance
+      author {
+        id
+        name
+      }
+    }
+  }
+}
 
+mutation UpdateBudget {
+  updateBudget(id: 10, budget: {name : "Groceries", balance: 15000}){
+    name
+    balance
+    account {
+      id
+      IBAN
+      cardNo
+      balance
+      author {
+        id
+        name
+      }
+    }
+  }
+}
+
+mutation DeleteBudget {
+  deleteBudget(id: 3) 
+}
+
+mutation CreateTransaction {
+  createTransaction(transaction: {
+    description: "Testing",
+    amount: 4000,
+    recipient: "e4e9fb0aab4f4a23e68ed3e5"
+  }){
+    description
+    date
+    amount
+    recipient
+    
+  }
+}
 
 -----PENTRU BOILERPLATE
 
