@@ -12,6 +12,10 @@ export const verifyBalance = async(balance, account_id) => {
         sum += budget.balance;
     } 
 
+    console.log('trying with balance: ', balance);
+    console.log('account balance', account.balance);
+    console.log('sum', sum);
+    
     if (balance > account.balance - sum)
         return account.balance - sum;
     else

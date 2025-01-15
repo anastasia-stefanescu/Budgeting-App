@@ -2,6 +2,8 @@ import graphql from 'graphql';
 import userInputType from '../../types/userInputType.js';
 import userType from '../../types/userType.js';
 import db from '../../../models/index.js';
+import bcrypt from 'bcrypt';
+
 
 const updateUserMutationResolver = async (_, args, context) => {
     const isAuthorized = !!context.user_id
@@ -22,8 +24,11 @@ const updateUserMutationResolver = async (_, args, context) => {
         return false;
     }
 
+    const crypted_password = await bcrypt.hash(args.user.password, 5);
+
     const updatedUser = await user.update({
-        ...args.user,
+        name: args.user.name,
+        password: crypted_password,
     });
 
     return updatedUser;
