@@ -1,0 +1,178 @@
+query AccountStatistics  {
+  accountStatistics(accountId: 8){
+    id
+    initialBalance
+    currentBalance
+    incomingTransactions
+    outgoingTransactions
+    incomingSum
+    outgoingSum
+    numberOfBudgets
+  }
+}
+
+query BudgetStatistics {
+  budgetStatistics(budgetId: 16){
+    id
+    initialBalance
+    currentBalance
+    numberTransactions
+  }
+}
+
+query TransactionsStatistics {
+  transactionsStatistics(
+    accountId: 8,
+    budgetId: 14,
+    begin: "2025-01-15T08:26:05.155Z",
+    end: "2025-01-15T09:18:47.457Z"
+  ){
+    accountId
+    budgetId
+    amount
+    numberTransactions
+    begin
+    end
+  }
+}
+  
+mutation CreateUser {
+  createUser(user: { 
+    name: "Elena", 
+    password: "elena" 
+  }) {
+    id
+    name
+  }
+}
+
+mutation Login {
+  login( credentials: {
+    username: "Elena Marin",
+    password: "elena"
+  }){
+    token
+  }
+}
+
+mutation UpdateUser {
+  updateUser(id: 7, user: {name: "Elena Marin", password:  "elena"})
+  {
+    id
+    name
+  }
+}
+
+mutation DeleteUser {
+  deleteUser(id: 6) 
+}
+
+mutation CreateAccount {
+  createAccount(account: {balance: 10000}) {
+    id 
+    IBAN
+    cardNo
+    balance
+    author {
+      id
+      name
+    }
+  }
+}
+
+mutation DeleteAccount {
+  deleteAccount(id: 8)
+}
+
+mutation UpdateAccount {
+  updateAccount(id:8, account: {balance: 17000}) {
+    id 
+    IBAN
+    cardNo
+    balance
+    author {
+      id
+      name
+    }
+  }
+}
+
+mutation CreateBudget {
+  createBudget(budget: {
+    name: " Elena's budget ",
+    balance: 7000
+  }){
+    id
+    name
+    balance
+    account {
+      id
+      IBAN
+      cardNo
+      balance
+      author {
+        id
+        name
+      }
+    }
+  }
+}
+
+mutation UpdateBudget {
+  updateBudget(id: 14, budget: {name : "Various", balance: 7000}){
+    id
+    name
+    balance
+    account {
+      id
+      IBAN
+      cardNo
+      balance
+      author {
+        id
+        name
+      }
+    }
+  }
+}
+
+mutation DeleteBudget {
+  deleteBudget(id: 16) 
+}
+
+mutation CreateTransaction {
+  createTransaction(transaction: {
+    description: "Elena first",
+    amount: 4000,
+    recipient: "850fe3ba76ce744df55c3fc4"
+  }){
+    description
+    date
+    amount
+    recipient
+    budget {
+      name
+    balance
+    account {
+      id
+      IBAN
+      cardNo
+      balance
+      author {
+        id
+        name
+      }
+    }
+    }
+    account {
+      id
+      IBAN
+      cardNo
+      balance
+      author {
+        id
+        name
+      }
+    }
+  }
+}

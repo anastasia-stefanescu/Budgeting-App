@@ -55,7 +55,7 @@ mutation CreateUser {
   }
 }
 
-mutation Login {
+mutation Login1 {
   login( credentials: {
     username: "Elena",
     password: "elena"
@@ -65,14 +65,14 @@ mutation Login {
 }
 
 mutation UpdateUser {
-  updateUser(id: 7, user: {name: "Elena Marin", password:  "elena"})
+  updateUser(id: 8, user: {name: "Elena Marin", password:  "elena"})
   {
     id
     name
   }
 }
 
-mutation Login {
+mutation Login2 {
   login( credentials: {
     username: "Elena Marin",
     password: "elena"
@@ -81,8 +81,8 @@ mutation Login {
   }
 }
 
-mutation CreateAccount {
-  createAccount(account: {balance: 16000}) {
+mutation CreateAccount_1_Elena {
+  createAccount(account: {balance: 15000}) {
     id 
     IBAN
     cardNo
@@ -94,20 +94,7 @@ mutation CreateAccount {
   }
 }
 
-mutation UpdateAccount {
-  updateAccount(id:8, account: {balance: 17000}) {
-    id 
-    IBAN
-    cardNo
-    balance
-    author {
-      id
-      name
-    }
-  }
-}
-
-mutation CreateBudget {
+mutation CreateBudget_1_Elena {
   createBudget(budget: {
     name: " Shopping ",
     balance: 10000
@@ -128,10 +115,24 @@ mutation CreateBudget {
   }
 }
 
-mutation CreateBudget {
+mutation UpdateAccount_1_Elena {
+  updateAccount(id:8, account: {balance: 14000}) {
+    id 
+    IBAN
+    cardNo
+    balance
+    author {
+      id
+      name
+    }
+  }
+}
+
+#AT FIRST 5000,it won't work, then 3000
+mutation CreateBudget_2_Elena {
   createBudget(budget: {
     name: " Clothes ",
-    balance: 9000 
+    balance: 5000 
   }){
     id
     name
@@ -149,9 +150,24 @@ mutation CreateBudget {
   }
 }
 
+mutation CreateAccount_2_Elena {
+  createAccount(account: {balance: 7000}) {
+    id 
+    IBAN
+    cardNo
+    balance
+    author {
+      id
+      name
+    }
+  }
+}
 
-mutation UpdateBudget {
-  updateBudget(id: 13, budget: {name : "House items", balance: 12000}){
+mutation CreateBudget_3_Elena {
+  createBudget(budget: {
+    name: " Food ",
+    balance: 4000 
+  }){
     id
     name
     balance
@@ -168,11 +184,31 @@ mutation UpdateBudget {
   }
 }
 
-
-mutation CreateTransaction {
+#MODIFY ID!!
+# 
+mutation UpdateBudget_1_Elena {
+  updateBudget(id: 13, budget: {name : "House items", balance: 8000}){
+    id
+    name
+    balance
+    account {
+      id
+      IBAN
+      cardNo
+      balance
+      author {
+        id
+        name
+      }
+    }
+  }
+}
+# SEND WITH ACCOUNT 1 OF ELENA
+#SEND WITH ACCOUNT  AND BUDGET 
+mutation CreateTransaction_1_to_other_user {
   createTransaction(transaction: {
-    description: "Sending to Denisa",
-    amount: 9000,
+    description: "To Denisa",
+    amount: 6000,
     recipient: "e4e9fb0aab4f4a23e68ed3e5"
   }){
     description
@@ -205,3 +241,242 @@ mutation CreateTransaction {
     }
   }
 }
+
+#SEND WITH ACCOUNT 1 AND BUDGET 1, TRY AT FIRST WITH 9500 then 2000 (9500 won't work because of account)
+
+mutation CreateTransaction_2_to_other_user {
+  createTransaction(transaction: {
+    description: "To Ioana",
+    amount: 9500,
+    recipient: "408b40eff0368a7adfd7103e"
+  }){
+    description
+    date
+    amount
+    recipient
+    budget {
+      name
+    balance
+    account {
+      id
+      IBAN
+      cardNo
+      balance
+      author {
+        id
+        name
+      }
+    }
+    }
+    account {
+      id
+      IBAN
+      cardNo
+      balance
+      author {
+        id
+        name
+      }
+    }
+  }
+}
+
+#COPY IBAN HERE!!! SEND USING ACCOUNT 1 AND BUDGET 2
+# SEND TO ACCOUNT 2
+
+mutation CreateTransaction_3_to_other_account {
+  createTransaction(transaction: {
+    description: "To Elena's 2nd account",
+    amount: 1500,
+    recipient: ""
+  }){
+    description
+    date
+    amount
+    recipient
+    budget {
+      name
+    balance
+    account {
+      id
+      IBAN
+      cardNo
+      balance
+      author {
+        id
+        name
+      }
+    }
+    }
+    account {
+      id
+      IBAN
+      cardNo
+      balance
+      author {
+        id
+        name
+      }
+    }
+  }
+}
+
+#COPY IBAN HERE!!! SEND USING ACCOUNT 2 AND BUDGET 3
+# SEND TO ACCOUNT 1
+
+mutation CreateTransaction_4_to_other_account {
+  createTransaction(transaction: {
+    description: "To Elena's 1st account",
+    amount: 3500,
+    recipient: ""
+  }){
+    description
+    date
+    amount
+    recipient
+    budget {
+      name
+    balance
+    account {
+      id
+      IBAN
+      cardNo
+      balance
+      author {
+        id
+        name
+      }
+    }
+    }
+    account {
+      id
+      IBAN
+      cardNo
+      balance
+      author {
+        id
+        name
+      }
+    }
+  }
+}
+
+# FOR ACCOUNT 1 OF ELENA, SET ID HERE!!!!!
+
+query AccountStatistics  {
+  accountStatistics(accountId: 9){
+    id
+    initialBalance
+    currentBalance
+    incomingTransactions
+    outgoingTransactions
+    incomingSum
+    outgoingSum
+    numberOfBudgets
+  }
+}
+
+#FOR ACCOUNT 1, BUDGET 1, SET BUDGET ID HERE!!!!!
+
+query BudgetStatistics_1 {
+  budgetStatistics(budgetId: 16){
+    id
+    initialBalance
+    currentBalance
+    numberTransactions
+  }
+}
+
+# FOR ACCOUNT 1, BUDGET 2, SET BUDGET ID HERE!!!!!
+
+query BudgetStatistics_2 {
+  budgetStatistics(budgetId: 16){
+    id
+    initialBalance
+    currentBalance
+    numberTransactions
+  }
+}
+
+# FOR ACCOUNT 2, BUDGET 3, SET BUDGET ID HERE!!!!!
+
+query BudgetStatistics_3 {
+  budgetStatistics(budgetId: 16){
+    id
+    initialBalance
+    currentBalance
+    numberTransactions
+  }
+}
+
+# FOR NO ACCOUNT NOR BUDGET, SET TIMEFRAMES HERE !!!!
+#THEN HERE MODIFY TIMEFRAMES!!!
+
+query TransactionsStatistics_1 {
+  transactionsStatistics(
+    accountId: null,
+    budgetId: null,
+    begin: "2025-01-15T08:26:05.155Z",
+    end: "2025-01-15T09:18:47.457Z"
+  ){
+    accountId
+    budgetId
+    amount
+    numberTransactions
+    begin
+    end
+  }
+}
+
+# FOR ACCOUNT 1 OF ELENA, SET TIMEFRAMES!!!
+
+query TransactionsStatistics_2 {
+  transactionsStatistics(
+    accountId: 8,
+    budgetId: null,
+    begin: "2025-01-15T08:26:05.155Z",
+    end: "2025-01-15T09:18:47.457Z"
+  ){
+    accountId
+    budgetId
+    amount
+    numberTransactions
+    begin
+    end
+  }
+}
+
+# FOR ACCOUNT 1 AND BUDGET 1 or 2, SET TIMEFRAMES!!
+
+query TransactionsStatistics_3 {
+  transactionsStatistics(
+    accountId: 8,
+    budgetId: 14,
+    begin: "2025-01-15T08:26:05.155Z",
+    end: "2025-01-15T09:18:47.457Z"
+  ){
+    accountId
+    budgetId
+    amount
+    numberTransactions
+    begin
+    end
+  }
+}
+
+# DELETE BUDGET 2 OF ACCOUNT 1 OF ELENA, SET ID!!!!
+mutation DeleteBudget {
+  deleteBudget(id: 18) 
+}
+
+
+# DELETE ACCOUNT 2 OF ELENA, SET ID!!!!!!
+mutation DeleteAccount {
+  deleteAccount(id: 10)
+}
+
+# DELETE USER ELENA, SET ID!!!!
+mutation DeleteUser {
+  deleteUser(id: 9) 
+}
+
