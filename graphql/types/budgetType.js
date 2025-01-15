@@ -4,6 +4,7 @@ import accountType from './accountType.js';
 const budgetType = new GraphQLObjectType({
     name: 'Budget',
     fields: {
+        id: {type: GraphQLInt},
         name: { type: GraphQLString },
         balance: { type: GraphQLInt},
         createdAt: { type: GraphQLString },

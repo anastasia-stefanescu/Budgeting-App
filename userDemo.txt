@@ -1,0 +1,207 @@
+create user
+
+
+login
+
+update user
+
+create account
+update account
+
+create budget > account
+update budget < account
+create budget > left account
+update budget with sum bigger than what’s left
+
+create transaction to someone else:
+ - with account only - with account and budget + test something higher than budget,  then higher than account (the account was diminished before
+ - with account only + test something higher than account 
+ - another one of both to someone else
+
+create new account 
+create new budget
+
+ create transaction to the first account
+
+Query account statistics
+
+Query budget statistics
+
+Query transactions statistics:
+ - only with timeframe
+ - with account
+ - with budget
+
+
+delete some transactions of the first account 
+
+delete one budget of the first account
+
+delete one account of the user
+
+delete the user
+
+Test other queries also???
+
+
+
+mutation CreateUser {
+  createUser(user: { 
+    name: "Elena", 
+    password: "elena" 
+  }) {
+    id
+    name
+  }
+}
+
+mutation Login {
+  login( credentials: {
+    username: "Elena",
+    password: "elena"
+  }){
+    token
+  }
+}
+
+mutation UpdateUser {
+  updateUser(id: 7, user: {name: "Elena Marin", password:  "elena"})
+  {
+    id
+    name
+  }
+}
+
+mutation Login {
+  login( credentials: {
+    username: "Elena Marin",
+    password: "elena"
+  }){
+    token
+  }
+}
+
+mutation CreateAccount {
+  createAccount(account: {balance: 16000}) {
+    id 
+    IBAN
+    cardNo
+    balance
+    author {
+      id
+      name
+    }
+  }
+}
+
+mutation UpdateAccount {
+  updateAccount(id:8, account: {balance: 17000}) {
+    id 
+    IBAN
+    cardNo
+    balance
+    author {
+      id
+      name
+    }
+  }
+}
+
+mutation CreateBudget {
+  createBudget(budget: {
+    name: " Shopping ",
+    balance: 10000
+  }){
+    id
+    name
+    balance
+    account {
+      id
+      IBAN
+      cardNo
+      balance
+      author {
+        id
+        name
+      }
+    }
+  }
+}
+
+mutation CreateBudget {
+  createBudget(budget: {
+    name: " Clothes ",
+    balance: 9000 
+  }){
+    id
+    name
+    balance
+    account {
+      id
+      IBAN
+      cardNo
+      balance
+      author {
+        id
+        name
+      }
+    }
+  }
+}
+
+
+mutation UpdateBudget {
+  updateBudget(id: 13, budget: {name : "House items", balance: 12000}){
+    id
+    name
+    balance
+    account {
+      id
+      IBAN
+      cardNo
+      balance
+      author {
+        id
+        name
+      }
+    }
+  }
+}
+
+
+mutation CreateTransaction {
+  createTransaction(transaction: {
+    description: "Sending to Denisa",
+    amount: 9000,
+    recipient: "e4e9fb0aab4f4a23e68ed3e5"
+  }){
+    description
+    date
+    amount
+    recipient
+    budget {
+      name
+    balance
+    account {
+      id
+      IBAN
+      cardNo
+      balance
+      author {
+        id
+        name
+      }
+    }
+    }
+    account {
+      id
+      IBAN
+      cardNo
+      balance
+      author {
+        id
+        name
+      }
+    }
+  }
+}

@@ -18,6 +18,21 @@ const deleteUserResolver = async (_, args, context) => {
         return false;
     }
 
+    const allAccounts = await db.Account.findAll({ where:{userId: user.id}});
+    for (const a of allAccounts){
+        const allBudgets = await db.Budget.findAll({where: {accountId: a.id}});
+        for (const b of allBudgets)
+        {
+            await b.destroy();
+        }
+        const allTransactions = await db.Transaction.findAll({where: {accountId: a.id,}});
+        for (const t of allTransactions)
+        {
+            await t.destroy();
+        }
+        await a.destroy();
+    }
+    
     await user.destroy();
     return true;
 }

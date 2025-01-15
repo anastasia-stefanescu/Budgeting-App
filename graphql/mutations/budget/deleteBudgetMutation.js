@@ -24,6 +24,12 @@ const deleteBudgetResolver = async (_, args, context) => {
             return false;
         }
 
+    const allTransactions = await db.Transaction.findAll({where: {budgetId: budget.id}});
+    for (const t of allTransactions)
+    {
+        await t.destroy();
+    }
+
     await budget.destroy();
     return true;
 }
