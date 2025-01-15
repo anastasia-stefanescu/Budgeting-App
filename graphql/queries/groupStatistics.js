@@ -77,6 +77,12 @@ const groupUserStatisticsResolver = async (_, { groupId }) => {
             where: { budgetId: budget.id },
         });
 
+        const budgetAccount = await db.Account.findOne({
+            where: { id: budget.accountId },
+        });
+
+        usersMap.set(budgetAccount.userId, [usersMap.get(budgetAccount.userId)[0] + budget.userContribution, usersMap.get(budgetAccount.userId)[1] + 1]);
+
         for(const transfer of transfers) {
             const account = await db.Account.findOne({
                 where: { id: transfer.accountId },
